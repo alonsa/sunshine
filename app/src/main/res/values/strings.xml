@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Sunshine</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_map">Map Location</string>
+
+    <!-- Menu label to fetch updated weather info from the server -->
+    <string name="action_refresh" translatable="false">Refresh</string>
+    <string name="title_activity_detail">Details</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <string name="pref_location_label">Location</string>
+    <string name="pref_location_key" translatable="false">location</string>
+    <string name="pref_location_def" translatable="false">Rehovot,Il</string>
+
+    <string name="pref_unit_label">Temperature Units</string>
+    <string name="pref_unit_key" translatable="false">Pick your units</string>
+    <string name="pref_unit_def" translatable="false">@string/pref_unit_celsius</string>
+
+
+    <string name="pref_unit_celsius">Celsius</string>
+    <string name="pref_unit_fahrenheit">Fahrenheit</string>
+
+
+</resources>
