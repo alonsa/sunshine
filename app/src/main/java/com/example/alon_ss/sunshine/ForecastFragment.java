@@ -1,14 +1,13 @@
 package com.example.alon_ss.sunshine;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,9 +19,6 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
-
-import org.json.JSONException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -33,7 +29,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -86,7 +81,7 @@ public class ForecastFragment extends Fragment {
         int layout = R.layout.list_item_forcast;
         int id = R.id.list_item_forcast_textview;
 
-        adapter = new ArrayAdapter<String>(activity, layout, id, new ArrayList<String>());
+        adapter = new ArrayAdapter<>(activity, layout, id, new ArrayList<String>());
 
         ListView listView = (ListView) rootView.findViewById(R.id.listview_forcast);
         listView.setAdapter(adapter);
@@ -138,7 +133,7 @@ public class ForecastFragment extends Fragment {
 
             String forecastData = getDataFromServer(postCode);
 
-            String[] weatherData = null;
+            String[] weatherData;
             try {
                 SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
                 String locationKey = getString(R.string.pref_location_key);
@@ -146,8 +141,12 @@ public class ForecastFragment extends Fragment {
                 String tempUnitType = prefs.getString(locationKey, locationDefault);
                 boolean isCelsius = (tempUnitType.equals(getString(R.string.pref_unit_celsius)));
                 weatherData = WeatherDataParser.getWeatherDataFromJson(forecastData, DAYS_NUM, isCelsius);
-            } catch (JSONException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
+
+                String errMsg = "No data from server";
+                ArrayList list = new ArrayList<>(Collections.nCopies(DAYS_NUM, errMsg));
+                weatherData = (String[]) list.toArray(new String[list.size()]);
             }
 
             return weatherData;
@@ -197,7 +196,7 @@ public class ForecastFragment extends Fragment {
                     // Since it's JSON, adding a newline isn't necessary (it won't affect parsing)
                     // But it does make debugging a *lot* easier if you print out the completed
                     // buffer for debugging.
-                    buffer.append(line + "\n");
+                    buffer.append(line).append("\n");
                 }
 
                 if (buffer.length() == 0) {
