@@ -2,6 +2,8 @@
     <string name="app_name">Sunshine</string>
     <string name="action_settings">Settings</string>
     <string name="action_map">Map Location</string>
+§    <string name="action_share">Share</string>
+
     <string name="open_weather_map_api_key" translatable="false">5623e0a0c55b8a2d889b9931b4ebeb8f</string>
 
     <!-- Menu label to fetch updated weather info from the server -->

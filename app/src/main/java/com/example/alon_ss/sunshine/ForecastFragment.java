@@ -167,7 +167,6 @@ public class ForecastFragment extends Fragment {
                 // Construct the URL for the OpenWeatherMap query
                 // Possible parameters are avaiable at OWM's forecast API page, at
                 // http://openweathermap.org/API#forecast
-                getString(R.string.open_weather_map_api_key);
                 Uri builtUri = Uri.parse(FORECAST_BASE_URL)
                         .buildUpon()
                         .appendQueryParameter(QUERY_PARAM, postCode)
